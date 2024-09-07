@@ -11,14 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ImageGallery.API.Migrations
 {
     [DbContext(typeof(GalleryContext))]
-    [Migration("20240130152449_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240907162139_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
 
             modelBuilder.Entity("ImageGallery.API.Entities.Image", b =>
                 {
