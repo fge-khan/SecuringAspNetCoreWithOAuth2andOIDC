@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(configure => 
         configure.JsonSerializerOptions.PropertyNamingPolicy = null);
+
+JsonWebTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 // create an HttpClient used for accessing the API
 builder.Services.AddHttpClient("APIClient", client =>
