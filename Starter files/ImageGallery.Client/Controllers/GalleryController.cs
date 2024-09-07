@@ -129,6 +129,7 @@ namespace ImageGallery.Client.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "PayingUser")]
         public IActionResult AddImage()
         {
             return View();
@@ -136,6 +137,7 @@ namespace ImageGallery.Client.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "PayingUser")]
         public async Task<IActionResult> AddImage(AddImageViewModel addImageViewModel)
         {
             if (!ModelState.IsValid)
@@ -190,7 +192,7 @@ namespace ImageGallery.Client.Controllers
 
             var userClaimsSringBuilder = new StringBuilder();
 
-            foreach(var claim in User.Claims)
+            foreach (var claim in User.Claims)
             {
                 userClaimsSringBuilder.AppendLine(
                     $"Claim type: {claim.Type} - Claim value: {claim.Value}");
