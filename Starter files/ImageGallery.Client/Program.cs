@@ -51,6 +51,11 @@ builder.Services.AddAuthentication(options =>
       options.ClaimActions.DeleteClaim("idp"); // This remove the idp claim from the list of claims
       options.Scope.Add("roles");
       options.ClaimActions.MapJsonKey("role", "role");
+      options.TokenValidationParameters = new()
+      {
+          NameClaimType = "given_name",
+          RoleClaimType = "role"
+      };
   });
 
 var app = builder.Build();
