@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews()
-    .AddJsonOptions(configure => 
+    .AddJsonOptions(configure =>
         configure.JsonSerializerOptions.PropertyNamingPolicy = null);
 
 JsonWebTokenHandler.DefaultInboundClaimTypeMap.Clear();
@@ -33,14 +33,14 @@ builder.Services.AddAuthentication(options =>
       options.ClientId = "imagegalleryclient";
       options.ClientSecret = "secret";
       options.ResponseType = "code";
-      
+
       // set by default
       //options.Scope.Add("openid");
       //options.Scope.Add("profile");
-      
+
       // set by default
       //options.CallbackPath = new PathString("signin-oidc");
-      
+
       //options.SignedOutCallbackPath: default = host:port/signout-callback-oidc.
       //must match with the post logout redirect URI at IDP client config if you want to automatically return to the application afer logging out of the IDP
       //To change , set SignedOutCallbackPath
@@ -49,6 +49,8 @@ builder.Services.AddAuthentication(options =>
       options.GetClaimsFromUserInfoEndpoint = true;
       options.ClaimActions.Remove("aud"); // This ensure that the audience claim will be returned - what is removed here is the filter that remove the audience claim
       options.ClaimActions.DeleteClaim("idp"); // This remove the idp claim from the list of claims
+      options.Scope.Add("roles");
+      options.ClaimActions.MapJsonKey("role", "role");
   });
 
 var app = builder.Build();
