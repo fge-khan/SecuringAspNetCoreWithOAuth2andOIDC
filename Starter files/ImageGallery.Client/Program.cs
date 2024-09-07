@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.JsonWebTokens;
@@ -46,6 +47,8 @@ builder.Services.AddAuthentication(options =>
       //eg: SignedOutCallback = "pathaftersignout"
       options.SaveTokens = true;
       options.GetClaimsFromUserInfoEndpoint = true;
+      options.ClaimActions.Remove("aud"); // This ensure that the audience claim will be returned - what is removed here is the filter that remove the audience claim
+      options.ClaimActions.DeleteClaim("idp"); // This remove the idp claim from the list of claims
   });
 
 var app = builder.Build();
