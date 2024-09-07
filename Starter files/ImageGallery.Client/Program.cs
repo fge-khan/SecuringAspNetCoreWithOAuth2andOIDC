@@ -29,9 +29,18 @@ builder.Services.AddAuthentication(options =>
       options.ClientId = "imagegalleryclient";
       options.ClientSecret = "secret";
       options.ResponseType = "code";
+      
+      // set by default
       //options.Scope.Add("openid");
       //options.Scope.Add("profile");
+      
+      // set by default
       //options.CallbackPath = new PathString("signin-oidc");
+      
+      //options.SignedOutCallbackPath: default = host:port/signout-callback-oidc.
+      //must match with the post logout redirect URI at IDP client config if you want to automatically return to the application afer logging out of the IDP
+      //To change , set SignedOutCallbackPath
+      //eg: SignedOutCallback = "pathaftersignout"
       options.SaveTokens = true;
   });
 
