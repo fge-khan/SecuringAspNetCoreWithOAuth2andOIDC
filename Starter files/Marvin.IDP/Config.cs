@@ -18,7 +18,7 @@ public static class Config
         new ApiResource[]
         {
             new ApiResource("imagegalleryapi", "Image Gallery API", 
-                new [] { "role" })
+                new [] { "role", "country" })
             {
                 Scopes = {"imagegalleryapi.fullaccess"}
             }
