@@ -56,7 +56,9 @@ builder.Services.AddAuthentication(options =>
       options.ClaimActions.Remove("aud"); // This ensure that the audience claim will be returned - what is removed here is the filter that remove the audience claim
       options.ClaimActions.DeleteClaim("idp"); // This remove the idp claim from the list of claims
       options.Scope.Add("roles");
-      options.Scope.Add("imagegalleryapi.fullaccess");
+      //options.Scope.Add("imagegalleryapi.fullaccess");
+      options.Scope.Add("imagegalleryapi.read");
+      options.Scope.Add("imagegalleryapi.write");
       options.Scope.Add("country");
       options.ClaimActions.MapUniqueJsonKey("country", "country"); //Create a claiim from userinfo
       options.ClaimActions.MapJsonKey("role", "role"); //Create a claiim from userinfo

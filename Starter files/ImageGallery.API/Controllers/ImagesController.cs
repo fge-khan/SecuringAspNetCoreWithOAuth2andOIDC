@@ -68,6 +68,7 @@ namespace ImageGallery.API.Controllers
         //[Authorize(Roles = "PayingUser")]
         //using PBAC (policy based access control (or ABAC = attributes based control)
         [Authorize(Policy="UserCanAddImage")]
+        [Authorize(Policy="ClientApplicationCanWrite")]
         public async Task<ActionResult<Image>> CreateImage([FromBody] ImageForCreation imageForCreation)
         {
             // Automapper maps only the Title in our configuration
