@@ -1,3 +1,4 @@
+using ImageGallery.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -56,13 +57,20 @@ builder.Services.AddAuthentication(options =>
       options.ClaimActions.DeleteClaim("idp"); // This remove the idp claim from the list of claims
       options.Scope.Add("roles");
       options.Scope.Add("imagegalleryapi.fullaccess");
-      options.ClaimActions.MapJsonKey("role", "role");
+      options.Scope.Add("country");
+      options.ClaimActions.MapUniqueJsonKey("country", "country"); //Create a claiim from userinfo
+      options.ClaimActions.MapJsonKey("role", "role"); //Create a claiim from userinfo
       options.TokenValidationParameters = new()
       {
           NameClaimType = "given_name",
           RoleClaimType = "role"
       };
   });
+
+builder.Services.AddAuthorization(authorizationOptions =>
+{
+    authorizationOptions.AddPolicy("UserCanAddImage", AuthorizationPolicies.CanAddImage());
+});
 
 var app = builder.Build();
 
