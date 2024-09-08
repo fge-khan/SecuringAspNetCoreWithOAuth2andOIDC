@@ -129,7 +129,10 @@ namespace ImageGallery.Client.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize(Roles = "PayingUser")]
+        //This is RBAC access control
+        //[Authorize(Roles = "PayingUser")]
+        //using PBAC (policy based access control (or ABAC = attributes based control)
+        [Authorize(Policy = "UserCanAddImage")]
         public IActionResult AddImage()
         {
             return View();
@@ -137,7 +140,11 @@ namespace ImageGallery.Client.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "PayingUser")]
+
+        //This is RBAC access control
+        //[Authorize(Roles = "PayingUser")]
+        //using PBAC (policy based access control (or ABAC = attributes based control)
+        [Authorize(Policy = "UserCanAddImage")]
         public async Task<IActionResult> AddImage(AddImageViewModel addImageViewModel)
         {
             if (!ModelState.IsValid)
